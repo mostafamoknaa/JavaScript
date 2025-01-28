@@ -1,0 +1,108 @@
+/* General Body Styling */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+
+/* Admin Dashboard */
+
+#admin-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+
+/* Table Styling */
+
+#course-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 20px;
+}
+
+#course-table thead {
+    background-color: gray;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+#course-table th,
+#course-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+#course-table tbody tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+#course-table tbody tr:hover {
+    background-color: #eef7ff;
+}
+
+
+/* Button Styling */
+
+button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+/* Update Button */
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+
+/* Delete Button */
+
+.delete-btn {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    #course-table th,
+    #course-table td {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+    button {
+        font-size: 0.75rem;
+    }
+}
