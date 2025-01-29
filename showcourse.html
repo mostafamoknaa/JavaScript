@@ -45,7 +45,7 @@
                     <td>4 hours</td>
                     <td>none</td>
                     <td>15</td>
-                    <td><button class="edit-btn">Update</button></td>
+                    <td><button class="edit-btn" data-id="1">Update</button></td>
                     <td><button class="delete-btn" data-id="1">Delete</button></td>
                 </tr>
                 <tr>
@@ -59,7 +59,7 @@
                     <td>4 hours</td>
                     <td>none</td>
                     <td>15</td>
-                    <td><button class="edit-btn">Update</button></td>
+                    <td><button class="edit-btn" data-id="2">Update</button></td>
                     <td><button class="delete-btn" data-id="2">Delete</button></td>
                 </tr>
                 <tr>
@@ -73,7 +73,7 @@
                     <td>4 hours</td>
                     <td>none</td>
                     <td>15</td>
-                    <td><button class="edit-btn">Update</button></td>
+                    <td><button class="edit-btn" data-id="3">Update</button></td>
                     <td><button class="delete-btn" data-id="3">Delete</button></td>
                 </tr>
                 <tr>
@@ -87,7 +87,7 @@
                     <td>4 hours</td>
                     <td>none</td>
                     <td>15</td>
-                    <td><button class="edit-btn">Update</button></td>
+                    <td><button class="edit-btn" data-id="4">Update</button></td>
                     <td><button class="delete-btn" data-id="4">Delete</button></td>
                 </tr>
                 <tr>
@@ -101,7 +101,7 @@
                     <td>4 hours</td>
                     <td>none</td>
                     <td>15</td>
-                    <td><button class="edit-btn">Update</button></td>
+                    <td><button class="edit-btn" data-id="5">Update</button></td>
                     <td><button class="delete-btn" data-id="5">Delete</button></td>
                 </tr>
                 <tr>
@@ -115,11 +115,33 @@
                     <td>4 hours</td>
                     <td>none</td>
                     <td>15</td>
-                    <td><button class="edit-btn">Update</button></td>
+                    <td><button class="edit-btn" data-id="6">Update</button></td>
                     <td><button class="delete-btn" data-id="6">Delete</button></td>
                 </tr>
             </tbody>
         </table>
+        <div id="update-form" style="display: none;">
+            <h3>Update Course</h3>
+            <input type="hidden" id="course-id" />
+            <label for="course-title">Title:</label>
+            <input type="text" id="course-title" required /><br>
+            <label for="course-image">Image URL:</label>
+            <input type="url" id="course-image" required /><br>
+            <label for="course-category">Category:</label>
+            <input type="text" id="course-category" required /><br>
+            <label for="course-instructor">Instructor Name:</label>
+            <input type="text" id="course-instructor" required /><br>
+            <label for="course-description">Description:</label>
+            <textarea id="course-description" required></textarea><br>
+            <label for="course-price">Price:</label>
+            <input type="number" id="course-price" required /><br>
+            <label for="course-duration">Duration (in hours):</label>
+            <input type="number" id="course-duration" required /><br>
+            <label for="course-video">Video URL:</label>
+            <input type="url" id="course-video" required /><br>
+            <button id="save-update">Save Changes</button>
+        </div>
+
     </div>
 
 </body>

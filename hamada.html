@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        input,
+        textarea,
+        button,
+        select {
+            display: block;
+            margin: 10px 0;
+            width: 100%;
+            padding: 10px;
+        }
+        
+        .course-list,
+        .category-list {
+            margin-top: 20px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+
+        <!-- Category Management -->
+        <h2>Manage Categories</h2>
+        <input type="text" id="categoryName" placeholder="Category Name">
+        <button id="addCategory">Add Category</button>
+
+        <div class="category-list">
+            <h3>Category List</h3>
+            <select id="categoryList">
+        <option value="">Select Category</option>
+      </select>
+        </div>
+
+        <!-- Course Management -->
+        <h2>Manage Courses</h2>
+        <input type="text" id="courseTitle" placeholder="Course Title">
+        <textarea id="courseDescription" placeholder="Course Description"></textarea>
+        <select id="courseCategory">
+      <option value="">Select Category</option>
+    </select>
+        <input type="text" id="courseDuration" placeholder="Course Duration">
+        <button id="addCourse">Add Course</button>
+
+        <div class="course-list">
+            <h3>Course List</h3>
+            <ul id="courses"></ul>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
