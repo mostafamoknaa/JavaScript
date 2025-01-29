@@ -13,13 +13,13 @@
       max-width: 800px;
       margin: 0 auto;
     }
-    input, textarea, button {
+    input, textarea, button, select {
       display: block;
       margin: 10px 0;
       width: 100%;
       padding: 10px;
     }
-    .course-list, .registration-list {
+    .course-list, .category-list {
       margin-top: 20px;
     }
     ul {
@@ -40,24 +40,31 @@
   <div class="container">
     <h1>Admin Dashboard</h1>
 
+    <!-- Category Management -->
+    <h2>Manage Categories</h2>
+    <input type="text" id="categoryName" placeholder="Category Name">
+    <button id="addCategory">Add Category</button>
+
+    <div class="category-list">
+      <h3>Category List</h3>
+      <select id="categoryList">
+        <option value="">Select Category</option>
+      </select>
+    </div>
+
     <!-- Course Management -->
     <h2>Manage Courses</h2>
     <input type="text" id="courseTitle" placeholder="Course Title">
     <textarea id="courseDescription" placeholder="Course Description"></textarea>
-    <input type="text" id="courseCategory" placeholder="Course Category">
+    <select id="courseCategory">
+      <option value="">Select Category</option>
+    </select>
     <input type="text" id="courseDuration" placeholder="Course Duration">
     <button id="addCourse">Add Course</button>
 
     <div class="course-list">
       <h3>Course List</h3>
       <ul id="courses"></ul>
-    </div>
-
-    <!-- Registration Management -->
-    <h2>Manage Registrations</h2>
-    <div class="registration-list">
-      <h3>Registration List</h3>
-      <ul id="registrations"></ul>
     </div>
   </div>
 

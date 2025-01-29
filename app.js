@@ -21,15 +21,93 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 // DOM Elements
+// DOM Elements
 const courseTitle = document.getElementById("courseTitle");
 const courseDescription = document.getElementById("courseDescription");
 const courseCategory = document.getElementById("courseCategory");
 const courseDuration = document.getElementById("courseDuration");
 const addCourseButton = document.getElementById("addCourse");
 const coursesList = document.getElementById("courses");
-const registrationsList = document.getElementById("registrations");
+const categoryList = document.getElementById("categoryList");
+const addCategoryButton = document.getElementById("addCategory");
+const categoryName = document.getElementById("categoryName");
 
-// Add Course
+// Add Category
+addCategoryButton.addEventListener("click", async () => {
+
+    var flag=0;
+    const name = categoryName.value;
+    if (!name) {
+        alert("Please enter a category name");
+        return;
+    }
+    try {  
+
+        const snapshot = await getDocs(collection(db, "categories"));
+        snapshot.forEach(doc => {
+            const category = doc.data();
+        if (category.name === name) {
+            flag=1;
+           
+        }
+        else
+        {flag=0;}
+    });
+   if(flag==0){
+    const docRef = await addDoc(collection(db, "categories"), {
+        name: name
+        });
+        alert("Category added successfully");
+        categoryName.value = "";
+        }
+        else{
+            alert("Category already exists");
+            return;
+        }
+        } catch (e) {
+            console.error("Error adding category: ", e);
+            }
+            });
+            
+//    }
+//     await addDoc(collection(db, "categories"), { name });
+
+//         alert("Category added successfully!");
+//         categoryName.value = "";
+//         fetchCategories();
+//     } catch (error) {
+//         console.error("Error adding category: ", error);
+//     }
+// });
+
+// Fetch Categories and Update Category Dropdown
+async function fetchCategories() {
+    categoryList.innerHTML = "";
+    try {
+        const snapshot = await getDocs(collection(db, "categories"));
+        snapshot.forEach(doc => {
+            const category = doc.data();
+            const option = document.createElement("option");
+            option.value = doc.id;
+            option.textContent = category.name;
+            categoryList.appendChild(option);
+        });
+
+        // Update courseCategory dropdown
+        courseCategory.innerHTML = `<option value="">Select Category</option>`;
+        snapshot.forEach(doc => {
+            const category = doc.data();
+            const option = document.createElement("option");
+            option.value = doc.id;
+            option.textContent = category.name;
+            courseCategory.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error fetching categories: ", error);
+    }
+}
+
+// Add Course to Specific Category
 addCourseButton.addEventListener("click", async () => {
     const title = courseTitle.value;
     const description = courseDescription.value;
@@ -42,10 +120,10 @@ addCourseButton.addEventListener("click", async () => {
     }
 
     try {
-        await addDoc(collection(db, "courses"), {
+        const categoryRef = doc(db, "categories", category);
+        await addDoc(collection(categoryRef, "courses"), {
             title,
             description,
-            category,
             duration
         });
         alert("Course added successfully!");
@@ -53,26 +131,34 @@ addCourseButton.addEventListener("click", async () => {
         courseDescription.value = "";
         courseCategory.value = "";
         courseDuration.value = "";
-        fetchCourses(); // Refresh the course list
+        fetchCourses(category); // Fetch courses for the selected category
     } catch (error) {
         console.error("Error adding course: ", error);
     }
 });
 
-// Fetch and Display Courses
-async function fetchCourses() {
+// Fetch and Display Courses from Selected Category
+courseCategory.addEventListener("change", () => {
+    const selectedCategory = courseCategory.value;
+    fetchCourses(selectedCategory);
+});
+
+async function fetchCourses(category) {
+    coursesList.innerHTML = "";
+    if (!category) return;
+
     try {
-        const snapshot = await getDocs(collection(db, "courses"));
-        coursesList.innerHTML = ""; // Clear the list
+        const categoryRef = doc(db, "categories", category);
+        const snapshot = await getDocs(collection(categoryRef, "courses"));
         snapshot.forEach(doc => {
             const course = doc.data();
             const li = document.createElement("li");
             li.innerHTML = `
-        <strong>${course.title}</strong> (${course.category})<br>
-        ${course.description}<br>
-        Duration: ${course.duration}
-        <button onclick="deleteCourse('${doc.id}')">Delete</button>
-      `;
+                <strong>${course.title}</strong><br>
+                ${course.description}<br>
+                Duration: ${course.duration}<br>
+                <button onclick="deleteCourse('${category}', '${doc.id}')">Delete</button>
+            `;
             coursesList.appendChild(li);
         });
     } catch (error) {
@@ -80,62 +166,17 @@ async function fetchCourses() {
     }
 }
 
-// Delete Course
-async function deleteCourse(courseId) {
+// Delete Course from Specific Category
+async function deleteCourse(category, courseId) {
     try {
-        await deleteDoc(doc(db, "courses", courseId));
+        const courseRef = doc(db, "categories", category, "courses", courseId);
+        await deleteDoc(courseRef);
         alert("Course deleted successfully!");
-        fetchCourses(); // Refresh the course list
+        fetchCourses(category); // Refresh the course list for the selected category
     } catch (error) {
         console.error("Error deleting course: ", error);
     }
 }
 
-// Fetch and Display Registrations
-async function fetchRegistrations() {
-    try {
-        const snapshot = await getDocs(collection(db, "registrations"));
-        registrationsList.innerHTML = ""; // Clear the list
-        snapshot.forEach(doc => {
-            const registration = doc.data();
-            const li = document.createElement("li");
-            li.innerHTML = `
-        Student ID: ${registration.studentId}<br>
-        Course ID: ${registration.courseId}<br>
-        Status: ${registration.status}
-        <button onclick="approveRegistration('${doc.id}')">Approve</button>
-        <button onclick="rejectRegistration('${doc.id}')">Reject</button>
-      `;
-            registrationsList.appendChild(li);
-        });
-    } catch (error) {
-        console.error("Error fetching registrations: ", error);
-    }
-}
-
-// Approve Registration
-async function approveRegistration(registrationId) {
-    try {
-        await updateDoc(doc(db, "registrations", registrationId), { status: "approved" });
-        alert("Registration approved!");
-        fetchRegistrations(); // Refresh the registration list
-    } catch (error) {
-        console.error("Error approving registration: ", error);
-    }
-}
-
-// Reject Registration
-async function rejectRegistration(registrationId) {
-    try {
-        await updateDoc(doc(db, "registrations", registrationId), { status: "rejected" });
-        alert("Registration rejected!");
-        fetchRegistrations(); // Refresh the registration list
-    } catch (error) {
-        console.error("Error rejecting registration: ", error);
-    }
-}
-
-// Initial Fetch
-fetchCourses();
-fetchRegistrations();
-window.deleteCourse = deleteCourse;
+fetchCategories(); 
+window.deleteCourse=deleteCourse;
