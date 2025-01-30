@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="icon" href="images/e-learning.jpeg" type="image/x-icon" />
+    <title>Show Courses</title>
     <link rel="stylesheet" href="style/showcourses.css">
-    <title>Show Course</title>
 </head>
 
 <body>
     <div id="admin-dashboard">
+        <h2>Manage Courses</h2>
         <table id="course-table">
             <thead>
                 <tr>
@@ -27,124 +28,34 @@
                     <th>Description</th>
                     <th>Price</th>
                     <th>Duration</th>
-                    <th>Content</th>
-                    <th>Number of Student</th>
-                    <th colspan="2">Manage</th>
-
+                    <th colspan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Pythin</td>
-                    <td>none</td>
-                    <td>Programming</td>
-                    <td>Mostafa</td>
-                    <td>intro</td>
-                    <td>120$</td>
-                    <td>4 hours</td>
-                    <td>none</td>
-                    <td>15</td>
-                    <td><button class="edit-btn" data-id="1">Update</button></td>
-                    <td><button class="delete-btn" data-id="1">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Pythin</td>
-                    <td>none</td>
-                    <td>Programming</td>
-                    <td>Mostafa</td>
-                    <td>intro</td>
-                    <td>120$</td>
-                    <td>4 hours</td>
-                    <td>none</td>
-                    <td>15</td>
-                    <td><button class="edit-btn" data-id="2">Update</button></td>
-                    <td><button class="delete-btn" data-id="2">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Pythin</td>
-                    <td>none</td>
-                    <td>Programming</td>
-                    <td>Mostafa</td>
-                    <td>intro</td>
-                    <td>120$</td>
-                    <td>4 hours</td>
-                    <td>none</td>
-                    <td>15</td>
-                    <td><button class="edit-btn" data-id="3">Update</button></td>
-                    <td><button class="delete-btn" data-id="3">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Pythin</td>
-                    <td>none</td>
-                    <td>Programming</td>
-                    <td>Mostafa</td>
-                    <td>intro</td>
-                    <td>120$</td>
-                    <td>4 hours</td>
-                    <td>none</td>
-                    <td>15</td>
-                    <td><button class="edit-btn" data-id="4">Update</button></td>
-                    <td><button class="delete-btn" data-id="4">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Pythin</td>
-                    <td>none</td>
-                    <td>Programming</td>
-                    <td>Mostafa</td>
-                    <td>intro</td>
-                    <td>120$</td>
-                    <td>4 hours</td>
-                    <td>none</td>
-                    <td>15</td>
-                    <td><button class="edit-btn" data-id="5">Update</button></td>
-                    <td><button class="delete-btn" data-id="5">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Pythin</td>
-                    <td>none</td>
-                    <td>Programming</td>
-                    <td>Mostafa</td>
-                    <td>intro</td>
-                    <td>120$</td>
-                    <td>4 hours</td>
-                    <td>none</td>
-                    <td>15</td>
-                    <td><button class="edit-btn" data-id="6">Update</button></td>
-                    <td><button class="delete-btn" data-id="6">Delete</button></td>
-                </tr>
+                <!-- Course rows will be inserted here dynamically -->
             </tbody>
         </table>
+
         <div id="update-form" style="display: none;">
             <h3>Update Course</h3>
             <input type="hidden" id="course-id" />
-            <label for="course-title">Title:</label>
+            <label>Title:</label>
             <input type="text" id="course-title" required /><br>
-            <label for="course-image">Image URL:</label>
+            <label>Image URL:</label>
             <input type="url" id="course-image" required /><br>
-            <label for="course-category">Category:</label>
-            <input type="text" id="course-category" required /><br>
-            <label for="course-instructor">Instructor Name:</label>
+            <label>Instructor Name:</label>
             <input type="text" id="course-instructor" required /><br>
-            <label for="course-description">Description:</label>
+            <label>Description:</label>
             <textarea id="course-description" required></textarea><br>
-            <label for="course-price">Price:</label>
+            <label>Price:</label>
             <input type="number" id="course-price" required /><br>
-            <label for="course-duration">Duration (in hours):</label>
+            <label>Duration (in hours):</label>
             <input type="number" id="course-duration" required /><br>
-            <label for="course-video">Video URL:</label>
-            <input type="url" id="course-video" required /><br>
             <button id="save-update">Save Changes</button>
         </div>
-
     </div>
 
 </body>
-<script src="script/deletecourse.js"></script>
+<script type="module" src="script/deletecourse.js"></script>
 
 </html>

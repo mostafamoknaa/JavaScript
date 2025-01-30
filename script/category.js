@@ -17,9 +17,6 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-console.log("Firebase initialized:", app);
-console.log("Firestore connected:", db);
-
 
 // Get elements
 const categoryForm = document.getElementById("category-form");
