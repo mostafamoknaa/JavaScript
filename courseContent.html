@@ -1,9 +1,6 @@
-<!-- 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,28 +10,37 @@
       font-family: Arial, sans-serif;
       margin: 20px;
     }
+
     .container {
       max-width: 800px;
       margin: 0 auto;
     }
+
     img {
       width: 100%;
       max-height: 300px;
       object-fit: cover;
     }
+
     iframe {
       width: 100%;
       height: 315px;
       margin-top: 20px;
     }
+
+    .no-content {
+      color: red;
+      font-style: italic;
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1 id="courseTitle"></h1>
     <img id="courseImage" alt="Course Image">
     <p><strong>Instructor:</strong> <span id="courseInstructor"></span></p>
-    <p><strong>Price:</strong> $<span id="coursePrice"></span></p>
+    <p><strong>Price:</strong> <span id="coursePrice"></span></p>
     <p><strong>Duration:</strong> <span id="courseDuration"></span></p>
     <p><strong>Description:</strong> <span id="courseDescription"></span></p>
 
@@ -42,108 +48,57 @@
     <div id="videoContainer"></div>
   </div>
 
-  <script>
-    // استرجاع بيانات الدورة من localStorage
-    const selectedCourse = JSON.parse(localStorage.getItem("selectedCourse"));
+  <script type="module"  src="courseContent.js"> </script>
 
-    if (!selectedCourse) {
-      document.body.innerHTML = "<h2>No course selected</h2>";
-    } else {
-      document.getElementById("courseTitle").innerText = selectedCourse.title;
-      document.getElementById("courseImage").src = selectedCourse.image;
-      document.getElementById("courseInstructor").innerText = selectedCourse.instructor;
-      document.getElementById("coursePrice").innerText = selectedCourse.price;
-      document.getElementById("courseDuration").innerText = selectedCourse.duration;
-      document.getElementById("courseDescription").innerText = selectedCourse.description;
 
-      const videoContainer = document.getElementById("videoContainer");
-      selectedCourse.content.forEach(videoUrl => {
-        const iframe = document.createElement("iframe");
-        iframe.src = videoUrl.trim(); // تأكد من أن الرابط صحيح
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-        videoContainer.appendChild(iframe);
-      });
-    }
-  </script>
+    <!-- // //  const selectedCourse = JSON.parse(localStorage.getItem("selectedCourse"));
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const courseId = urlParams.get('courseId');
+
+
+    // if (courseId) {
+
+    // const courseRef = doc(db, "courses", courseId);
+    // getDoc(courseRef).then((docSnap) => {
+    //     if (docSnap.exists()) {
+    //         const course = docSnap.data();
+    //     }})}
+
+
+
+
+
+
+    
+
+    // if (!selectedCourse) {
+    //   document.body.innerHTML = "<h2>No course selected</h2>";
+    // } else {
+    //   document.getElementById("courseTitle").innerText = selectedCourse.title;
+    //   document.getE("courseDuration").innerText = selectedCourse.duration;
+    //   document.getElementById("lementById("courseImage").src = selectedCourse.image;
+    //   document.getElementById("courseInstructor").innerText = selectedCourse.instructor;
+    //   document.getElementById("coursePrice").innerText = selectedCourse.price;
+    //   document.getElementByIdcourseDescription").innerText = selectedCourse.description;
+
+    //   const videoContainer = document.getElementById("videoContainer");
+
+    //   if (!selectedCourse.content || selectedCourse.content.length === 0) {
+    //     videoContainer.innerHTML = "<p class='no-content'>No videos available for this course.</p>";
+    //   } else {
+    //     selectedCourse.content.forEach(videoUrl => {
+    //       if (videoUrl.trim()) {
+    //         const iframe = document.createElement("iframe");
+    //         iframe.src = videoUrl.trim();
+    //         iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    //         iframe.allowFullscreen = true;
+    //         videoContainer.appendChild(iframe);
+    //       }
+    //     });
+     //   }
+    // } -->
+   
+  
 </body>
-</html>
 
- -->
- <!DOCTYPE html>
- <html lang="en">
- <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Course Details</title>
-   <style>
-     body {
-       font-family: Arial, sans-serif;
-       margin: 20px;
-     }
-     .container {
-       max-width: 800px;
-       margin: 0 auto;
-     }
-     img {
-       width: 100%;
-       max-height: 300px;
-       object-fit: cover;
-     }
-     iframe {
-       width: 100%;
-       height: 315px;
-       margin-top: 20px;
-     }
-     .no-content {
-       color: red;
-       font-style: italic;
-     }
-   </style>
- </head>
- <body>
-   <div class="container">
-     <h1 id="courseTitle"></h1>
-     <img id="courseImage" alt="Course Image">
-     <p><strong>Instructor:</strong> <span id="courseInstructor"></span></p>
-     <p><strong>Price:</strong> $<span id="coursePrice"></span></p>
-     <p><strong>Duration:</strong> <span id="courseDuration"></span></p>
-     <p><strong>Description:</strong> <span id="courseDescription"></span></p>
-     
-     <h3>Course Content:</h3>
-     <div id="videoContainer"></div>
-   </div>
- 
-   <script>
-     const selectedCourse = JSON.parse(localStorage.getItem("selectedCourse"));
- 
-     if (!selectedCourse) {
-       document.body.innerHTML = "<h2>No course selected</h2>";
-     } else {
-       document.getElementById("courseTitle").innerText = selectedCourse.title;
-       document.getElementById("courseImage").src = selectedCourse.image;
-       document.getElementById("courseInstructor").innerText = selectedCourse.instructor;
-       document.getElementById("coursePrice").innerText = selectedCourse.price;
-       document.getElementById("courseDuration").innerText = selectedCourse.duration;
-       document.getElementById("courseDescription").innerText = selectedCourse.description;
- 
-       const videoContainer = document.getElementById("videoContainer");
- 
-       if (!selectedCourse.content || selectedCourse.content.length === 0) {
-         videoContainer.innerHTML = "<p class='no-content'>No videos available for this course.</p>";
-       } else {
-         selectedCourse.content.forEach(videoUrl => {
-           if (videoUrl.trim()) {
-             const iframe = document.createElement("iframe");
-             iframe.src = videoUrl.trim();
-             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-             iframe.allowFullscreen = true;
-             videoContainer.appendChild(iframe);
-           }
-         });
-       }
-     }
-   </script>
- </body>
- </html>
- 
+</html>

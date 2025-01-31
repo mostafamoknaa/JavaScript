@@ -66,8 +66,8 @@ const coursesList = document.getElementById("courses");
 // Load courses in real-time
 onSnapshot(collection(db, "courses"), (snapshot) => {
     coursesList.innerHTML = ""; // Clear previous data
-
-    snapshot.forEach(doc => {
+//i change this line to this no docs
+    snapshot.docs.forEach(doc => {
         const course = doc.data();
         const li = document.createElement("li");
 
@@ -85,7 +85,10 @@ onSnapshot(collection(db, "courses"), (snapshot) => {
 
     // Add event listeners to all "Enroll" buttons
     document.querySelectorAll(".enroll-btn").forEach(button => {
+        // localStorage.clear();
+
         button.addEventListener("click", (event) => {
+            window.location.href="courseContent.html";
             const courseId = event.target.getAttribute("data-id");
             window.location.href = `courseContent.html?courseId=${courseId}`; // Navigate with course ID
         });

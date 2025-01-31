@@ -1,8 +1,6 @@
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
-import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCBckLKiCtLIFvXX3SLfyCaszC-vFDL3JA",
@@ -19,13 +17,9 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-
-
-
 const urlParams = new URLSearchParams(window.location.search);
 const courseId = urlParams.get("courseId");
 
-// Load course details
 async function loadCourseContent() {
     if (!courseId) {
         alert("Invalid Course!");
@@ -33,33 +27,39 @@ async function loadCourseContent() {
         return;
     }
 
-    const courseDoc = await getDoc(doc(db, "courses", courseId));
+    const courseRef = doc(db, "courses", courseId);
 
-    if (!courseDoc.exists()) {
-        alert("Course not found!");
-        window.location.href = "index.html";
-        return;
-    }
+    onSnapshot(courseRef, (docSnap) => {
+        if (docSnap.exists()) {
+            const course = docSnap.data();
+            document.getElementById("courseTitle").innerText = course.title;
+            document.getElementById("courseDuration").innerText = course.duration;
+            document.getElementById("courseImage").src = course.image;
+            document.getElementById("courseInstructor").innerText = course.instructor;
+            document.getElementById("coursePrice").innerText = course.price;
+            document.getElementById("courseDescription").innerText = course.description;
 
-    const course = courseDoc.data();
-    document.getElementById("courseTitle").innerText = course.title;
-    document.getElementById("courseDescription").innerText = course.description;
+            const videoContainer = document.getElementById("videoContainer");
 
-    const lessonList = document.getElementById("lessonList");
-    lessonList.innerHTML = "";
-
-    course.content.forEach((video, index) => {
-        const li = document.createElement("li");
-        li.innerText = `Lesson ${index + 1}`;
-        li.onclick = () => loadVideo(video);
-        lessonList.appendChild(li);
+            if (!course.content || course.content.length === 0) {
+                videoContainer.innerHTML = "<p class='no-content'>No videos available for this course.</p>";
+            } else {
+                videoContainer.innerHTML = ""; // Clear previous videos
+                course.content.forEach(videoUrl => {
+                    if (videoUrl.trim()) {
+                        const iframe = document.createElement("iframe");
+                        iframe.src = videoUrl.trim();
+                        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                        iframe.allowFullscreen = true;
+                        videoContainer.appendChild(iframe);
+                    }
+                });
+            }
+        } else {
+            alert("Course not found!");
+            window.location.href = "index.html";
+        }
     });
-}
-
-// Load video in iframe
-function loadVideo(videoUrl) {
-    const videoPlayer = document.getElementById("videoPlayer");
-    videoPlayer.src = videoUrl;
 }
 
 // Load content on page load
