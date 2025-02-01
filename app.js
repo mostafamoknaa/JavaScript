@@ -41,7 +41,7 @@ addCategoryButton.addEventListener("click", async () => {
     }
 
     try {
-        await addDoc(collection(db, "categories"), { name });
+        const db = getFirestore(app);
         alert("Category added successfully!");
         categoryName.value = "";
     } catch (error) {
