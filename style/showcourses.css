@@ -1,87 +1,106 @@
-/* General Body Styling */
+/* General Page Styling */
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
     margin: 0;
     padding: 20px;
+    background-color: #f4f4f4;
+}
+
+
+/* Admin Dashboard Styling */
+
+#admin-dashboard {
+    max-width: 90%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Heading */
+
+h2 {
+    text-align: center;
     color: #333;
 }
 
 
-/* Admin Dashboard */
+/* Filter Dropdown */
 
-#admin-dashboard {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#status-filter {
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 15px;
 }
 
 
 /* Table Styling */
 
-#course-table {
+table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
     margin-top: 20px;
 }
 
-#course-table thead {
-    background-color: #343a40;
-    color: #ffffff;
-    font-weight: bold;
+th,
+td {
+    padding: 12px;
     text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
-#course-table th,
-#course-table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    text-align: center;
+th {
+    background-color: #007BFF;
+    color: white;
+    font-size: 18px;
 }
 
-#course-table tbody tr:nth-child(even) {
-    background-color: #f4f4f4;
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-#course-table tbody tr:hover {
-    background-color: #eef7ff;
-    transition: background 0.3s ease-in-out;
+tr:hover {
+    background-color: #ddd;
 }
 
 
-/* Button Styling */
+/* Course Image */
+
+td img {
+    width: 80px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+
+/* Action Buttons */
 
 button {
-    padding: 10px 15px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-radius: 6px;
+    padding: 8px 12px;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 button:hover {
-    opacity: 0.85;
-    transform: scale(1.05);
+    opacity: 0.8;
 }
 
 
-/* Update Button */
+/* Edit Button */
 
 .edit-btn {
     background-color: #ffc107;
-    color: #333;
-}
-
-.edit-btn:hover {
-    background-color: #e0a800;
+    color: black;
 }
 
 
@@ -89,81 +108,48 @@ button:hover {
 
 .delete-btn {
     background-color: #dc3545;
-    color: #ffffff;
-}
-
-.delete-btn:hover {
-    background-color: #c82333;
+    color: white;
 }
 
 
-/* Responsive Design */
-
-@media (max-width: 768px) {
-    #course-table th,
-    #course-table td {
-        font-size: 0.8rem;
-        padding: 8px;
-    }
-    button {
-        font-size: 0.8rem;
-        padding: 6px 10px;
-    }
-}
-
-
-/* Form Styles */
+/* Update Form Styling */
 
 #update-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    width: 50%;
+    margin: auto;
+    background: white;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #update-form h3 {
     text-align: center;
-    font-size: 1.5rem;
-    color: #0056b3;
-    margin-bottom: 10px;
+    color: #007BFF;
 }
 
-#update-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-#update-form select,
 #update-form input,
-#update-form textarea,
-#update-form button {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
+#update-form select,
 #update-form textarea {
-    resize: none;
-    height: 120px;
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-#update-form button {
-    background-color: #28a745;
+#save-update {
+    width: 50%;
+    margin-left: 140px;
+    background-color: #007BFF;
     color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
 }
 
-#update-form button:hover {
-    background-color: #218838;
-    transform: scale(1.05);
+#save-update:hover {
+    background-color: darkcyan;
 }

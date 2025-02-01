@@ -27,6 +27,7 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 
+
 // Function to get category name from Firestore using category ID
 async function getCategoryName(categoryId) {
     if (!categoryId) {
@@ -61,6 +62,9 @@ async function getCategoryName(categoryId) {
     }
 }
 
+const statusFilter = document.getElementById("status-filter");
+const searchInput = document.getElementById("search-input");
+
 // Function to fetch and display courses with category names
 async function fetchCourses() {
     const tableBody = document.querySelector("#course-table tbody");
@@ -68,7 +72,7 @@ async function fetchCourses() {
 
     try {
         const snapshot = await getDocs(collection(db, "courses"));
-
+        const selectedStatus = statusFilter.value;
 
         for (const [index, docData] of snapshot.docs.entries()) {
             const course = docData.data();
@@ -151,6 +155,7 @@ const categoryDropdown = document.getElementById("course-category");
 // Categories
 async function loadCategories() {
     try {
+
         const querySnapshot = await getDocs(collection(db, "categories"));
         categoryDropdown.innerHTML += `<option value="">Select a category</option>`;
 
@@ -165,6 +170,11 @@ async function loadCategories() {
         console.error("Error fetching categories:", error);
     }
 }
+
+//search bar
+
+
+
 
 // Load categories when the page loads
 //window.addEventListener("DOMContentLoaded", loadCategories);
