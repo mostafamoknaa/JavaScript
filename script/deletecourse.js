@@ -136,6 +136,7 @@ function attachEditListeners() {
                 document.getElementById("course-title").value = course.title;
                 document.getElementById("course-image").value = course.image;
                 document.getElementById("course-instructor").value = course.instructor;
+                document.getElementById("course-category").value = course.category;
                 document.getElementById("course-description").value = course.description;
                 document.getElementById("course-price").value = course.price;
                 document.getElementById("course-duration").value = course.duration;
@@ -144,6 +145,31 @@ function attachEditListeners() {
     });
 }
 
+const courseForm = document.getElementById("course-form");
+const categoryDropdown = document.getElementById("course-category");
+
+// Categories
+async function loadCategories() {
+    try {
+        const querySnapshot = await getDocs(collection(db, "categories"));
+        categoryDropdown.innerHTML += `<option value="">Select a category</option>`;
+
+        querySnapshot.forEach((doc) => {
+            const category = doc.data().name;
+            const option = document.createElement("option");
+            option.value = category;
+            option.textContent = category;
+            categoryDropdown.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+    }
+}
+
+// Load categories when the page loads
+//window.addEventListener("DOMContentLoaded", loadCategories);
+
+loadCategories();
 // Save Updated Course
 document.getElementById("save-update").addEventListener("click", async() => {
     const courseId = document.getElementById("course-id").value;
@@ -153,6 +179,7 @@ document.getElementById("save-update").addEventListener("click", async() => {
         title: document.getElementById("course-title").value,
         image: document.getElementById("course-image").value,
         instructor: document.getElementById("course-instructor").value,
+        category: document.getElementById("course-category").value,
         description: document.getElementById("course-description").value,
         price: parseFloat(document.getElementById("course-price").value),
         duration: parseInt(document.getElementById("course-duration").value),

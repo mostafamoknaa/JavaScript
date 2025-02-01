@@ -41,6 +41,7 @@ body {
     margin-left: 40px;
 }
 
+#course-form select,
 #course-form input,
 #course-form textarea,
 #course-form button {

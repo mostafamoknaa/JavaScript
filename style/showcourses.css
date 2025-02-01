@@ -139,6 +139,7 @@ button:hover {
     color: #555;
 }
 
+#update-form select,
 #update-form input,
 #update-form textarea,
 #update-form button {

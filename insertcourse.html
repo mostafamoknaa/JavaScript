@@ -17,28 +17,35 @@
         <!-- Course Form -->
         <form id="course-form">
             <h2>Insert New Course</h2>
-            <input type="hidden" id="course-id" />
             <label for="course-title">Title:</label>
             <input type="text" id="course-title" required />
+
             <label for="course-image">Image URL:</label>
             <input type="url" id="course-image" required />
+
             <label for="course-category">Category:</label>
-            <input type="text" id="course-category" required />
+            <select id="course-category" required></select>
+
             <label for="course-instructor">Instructor Name:</label>
             <input type="text" id="course-instructor" required />
+
             <label for="course-description">Description:</label>
             <textarea id="course-description" required></textarea>
+
             <label for="course-price">Price:</label>
             <input type="number" id="course-price" required />
+
             <label for="course-duration">Duration (in hours):</label>
             <input type="number" id="course-duration" required />
+
             <label for="course-video">Video URL:</label>
             <input type="url" id="course-video" required />
 
-            <button type="submit" id="save-course">Save Course</button>
+            <button type="submit">Save Course</button>
         </form>
     </div>
 
 </body>
+<script type="module" src="script/insertcourse.js"></script>
 
 </html>
