@@ -52,7 +52,7 @@ async function fetchCourses() {
                 <img src="${course.image}" alt="${course.title}">
                 <h3>${course.title}</h3>
                 <p>Instructor: ${course.instructor}</p>
-                <p>Category: ${categoryName}</p> <!-- ✅ Display category name -->
+                <p>Category: ${course.category}</p>
                 <p>Price: $${course.price}</p>
                 <p>Duration: ${course.duration} hrs</p>
                 <button class="wishlist-btn" onclick="toggleWishlist('${docData.id}', '${course.title}', '${course.image}', '${course.price}')">

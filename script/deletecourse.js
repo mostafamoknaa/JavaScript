@@ -81,7 +81,7 @@ async function fetchCourses() {
                     <td>${index + 1}</td>
                     <td>${course.title}</td>
                     <td><img src="${course.image}" width="50"></td>
-                    <td>${categoryName}</td>
+                    <td>${course.category}</td>
                     <td>${course.instructor}</td>
                     <td>${course.description}</td>
                     <td>$${course.price}</td>
