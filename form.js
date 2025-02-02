@@ -175,7 +175,7 @@ document.getElementById('form_in').addEventListener('submit', async function (ev
     
                     //window.location.href = "index.html";
                     window.location.replace("index.html");
-                });
+                }); 
             })
             .catch((error) => {
                 alert(error.message);

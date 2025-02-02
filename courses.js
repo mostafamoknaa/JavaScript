@@ -1,151 +1,7 @@
-// // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-// // import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-
-// // // Firebase configuration
-// // const firebaseConfig = {
-// //     apiKey: "AIzaSyCBckLKiCtLIFvXX3SLfyCaszC-vFDL3JA",
-// //     authDomain: "ecommerce-9d94f.firebaseapp.com",
-// //     projectId: "ecommerce-9d94f",
-// //     storageBucket: "ecommerce-9d94f.appspot.com",
-// //     messagingSenderId: "444404014366",
-// //     appId: "1:444404014366:web:d1e5a5f10e5b90ca95fd0f",
-// //     measurementId: "G-V7Q9HY61C5"
-// // };
-
-// // // Initialize Firebase
-// // const app = initializeApp(firebaseConfig);
-// // const db = getFirestore(app);
-// // const coursesList = document.getElementById("courses");
-
-// // // تحميل الدورات في الوقت الفعلي
-// // onSnapshot(collection(db, "courses"), (snapshot) => {
-// //     coursesList.innerHTML = ""; // مسح القائمة
-
-// //     snapshot.forEach(doc => {
-// //         const course = doc.data();
-// //         const li = document.createElement("li");
-
-// //         li.innerHTML = `
-// //             <img src="${course.image}" alt="${course.title}">
-// //             <h3>${course.title}</h3>
-// //             <p><strong>Instructor:</strong> ${course.instructor}</p>
-// //             <p><strong>Price:</strong> $${course.price}</p>
-// //             <p><strong>Duration:</strong> ${course.duration}</p>
-// //         `;
-
-// //         li.addEventListener("click", () => {
-// //             // تخزين بيانات الدورة في localStorage
-// //             localStorage.setItem("selectedCourse", JSON.stringify({ id: doc.id, ...course }));
-          
-// //             window.location.href = "courseContent.html"; // الانتقال إلى صفحة التفاصيل
-// //         });
-
-// //         coursesList.appendChild(li);
-// //     });
-// // });
-
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-// import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-// import { getDoc, doc,addDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-//     from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-
-// // Firebase configuration
-// const firebaseConfig = {
-//     apiKey: "AIzaSyCBckLKiCtLIFvXX3SLfyCaszC-vFDL3JA",
-//     authDomain: "ecommerce-9d94f.firebaseapp.com",
-//     projectId: "ecommerce-9d94f",
-//     storageBucket: "ecommerce-9d94f.appspot.com",
-//     messagingSenderId: "444404014366",
-//     appId: "1:444404014366:web:d1e5a5f10e5b90ca95fd0f",
-//     measurementId: "G-V7Q9HY61C5"
-// };
-
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
-// const coursesList = document.getElementById("courses");
-// const auth = getAuth(app);
-
-// // Load courses in real-time
-// onSnapshot(collection(db, "courses"), (snapshot) => {
-//     coursesList.innerHTML = ""; // Clear previous data
-// //i change this line to this no docs
-//     snapshot.docs.forEach(doc => {
-//         const course = doc.data();
-//         const li = document.createElement("li");
-
-//         li.innerHTML = `
-//             <img src="${course.image}" alt="${course.title}">
-//             <h3>${course.title}</h3>
-//             <p><strong>Instructor:</strong> ${course.instructor}</p>
-//             <p><strong>Price:</strong> $${course.price}</p>
-//             <p><strong>Duration:</strong> ${course.duration}</p>
-//             <button class="enroll-btn" data-id="${doc.id}">Enroll</button>
-//         `;
-
-//         coursesList.appendChild(li);
-//     });
-
-//     // Add event listeners to all "Enroll" buttons
-   
-//     document.querySelectorAll(".enroll-btn").forEach(button => {
-//         button.addEventListener("click", async (event) => {
-//             const courseId = event.target.getAttribute("data-id");
-    
-//             // First, check if the user is authenticated
-//             onAuthStateChanged(auth, async (user) => {
-//                 if (user) {
-//                     const userId = user.uid;
-    
-//                     // Store data in Firestore after getting the userId
-//                     try {
-//                         await addDoc(collection(db, "enrollment"), {
-//                             courseId: courseId,
-//                             userId: userId,
-//                             status: "pending"
-//                         });
-
-//                         // Fetch enrollment data by userId using snapshot
-//                         onSnapshot(collection(db, "enrollment"), (enrollmentSnapshot) => {
-//                             enrollmentSnapshot.docs.forEach(enrollmentDoc => {
-//                                 const enrollmentData = enrollmentDoc.data();
-//                                 if (enrollmentData.userId === userId && enrollmentData.courseId === courseId) {
-//                                     if (enrollmentData.status === "approved") {
-//                                         alert("Your enrollment is approved!");
-//                                          window.location.href = `courseContent.html?courseId=${courseId}`;
-
-//                                     } else {
-//                                         console.log("Enrollment status:", enrollmentData.status);
-//                                         alert("Your enrollment is not approved yet.");
-//                                     }
-//                                 }
-//                             });
-//                         });
-                         
-                         
-
-//                         // Redirect to course content page with the courseId
-                       
-//                     } catch (error) {
-//                         console.error("Error enrolling in course:", error);
-//                     }
-//                 } else {
-//                     console.log("User is not logged in.");
-//                     alert("Please log in to enroll in a course.");
-//                 }
-//             });
-//         });
-//     });
-    
-// });
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { getFirestore, collection, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getFirestore, collection, onSnapshot, getDocs, addDoc, query, where } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 
-// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCBckLKiCtLIFvXX3SLfyCaszC-vFDL3JA",
     authDomain: "ecommerce-9d94f.firebaseapp.com",
@@ -156,79 +12,125 @@ const firebaseConfig = {
     measurementId: "G-V7Q9HY61C5"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const coursesList = document.getElementById("courses");
-let currentUser = null; // Store the logged-in user
+let currentUser = null;
 
-// Check authentication state ONCE when the page loads
 onAuthStateChanged(auth, (user) => {
-    currentUser = user; // Store the logged-in user globally
+    currentUser = user;
+    loadCourses();
 });
 
-// Load courses in real-time
-onSnapshot(collection(db, "courses"), (snapshot) => {
-    coursesList.innerHTML = ""; // Clear previous data
+function loadCourses() {
+    onSnapshot(collection(db, "courses"), async (snapshot) => {
+        coursesList.innerHTML = "";
 
-    snapshot.docs.forEach(doc => {
-        const course = doc.data();
-        const li = document.createElement("li");
+        for (const doc of snapshot.docs) {
+            const course = doc.data();
+            const li = document.createElement("li");
 
-        li.innerHTML = `
-            <img src="${course.image}" alt="${course.title}">
-            <h3>${course.title}</h3>
-            <p><strong>Instructor:</strong> ${course.instructor}</p>
-            <p><strong>Price:</strong> $${course.price}</p>
-            <p><strong>Duration:</strong> ${course.duration}</p>
-            <button class="enroll-btn" data-id="${doc.id}">Enroll</button>
-        `;
+            let enrollmentStatus = "not enrolled";
+            let enrollmentId = null;
 
-        coursesList.appendChild(li);
-    });
+            if (currentUser) {
+                const enrollmentRef = collection(db, "enrollment");
+                const q = query(enrollmentRef, where("courseId", "==", doc.id), where("userId", "==", currentUser.uid));
 
-    // Add event listeners to all "Enroll" buttons
-    document.querySelectorAll(".enroll-btn").forEach(button => {
-        button.addEventListener("click", async (event) => {
-            if (!currentUser) {
-                alert("Please log in to enroll in a course.");
-                return;
-            }
-
-            const courseId = event.target.getAttribute("data-id");
-
-            try {
-                // Add enrollment to Firestore
-                await addDoc(collection(db, "enrollment"), {
-                    courseId: courseId,
-                    userId: currentUser.uid,
-                    status: "pending"
-                });
-
-                alert("Enrollment request submitted. Waiting for approval.");
+                const enrollmentSnapshot = await getDocs(q);
                 
-                // Redirect to course content page if approved
-                checkEnrollmentStatus(courseId, currentUser.uid);
-            } catch (error) {
-                console.error("Error enrolling in course:", error);
+                if (!enrollmentSnapshot.empty) {
+                    const enrollmentData = enrollmentSnapshot.docs[0].data();
+                    enrollmentStatus = enrollmentData.status;
+                    enrollmentId = enrollmentSnapshot.docs[0].id;
+                }
             }
-        });
-    });
-});
 
-// Function to check enrollment status
-function checkEnrollmentStatus(courseId, userId) {
-    onSnapshot(collection(db, "enrollment"), (enrollmentSnapshot) => {
-        enrollmentSnapshot.docs.forEach(enrollmentDoc => {
+            let buttonText = "Enroll";
+            if (enrollmentStatus === "approved") {
+                buttonText = "Open Course";
+            } else if (enrollmentStatus === "pending") {
+                buttonText = "Pending Approval";
+            }
+
+            li.innerHTML = `
+                <img src="${course.image}" alt="${course.title}">
+                <h3>${course.title}</h3>
+                <p><strong>Instructor:</strong> ${course.instructor}</p>
+                <p><strong>Price:</strong> $${course.price}</p>
+                <p><strong>Duration:</strong> ${course.duration}</p>
+                <button class="enroll-btn" data-id="${doc.id}" data-enrollment-id="${enrollmentId}" ${enrollmentStatus === "pending" ? "disabled" : ""}>${buttonText}</button>
+            `;
+
+            coursesList.appendChild(li);
+        }
+
+        document.querySelectorAll(".enroll-btn").forEach(button => {
+            button.addEventListener("click", (event) => handleEnrollment(event));
+        });
+
+        watchEnrollmentStatus();
+    });
+}
+
+async function handleEnrollment(event) {
+    if (!currentUser) {
+        alert("Please log in to enroll in a course.");
+        return;
+    }
+
+    const courseId = event.target.getAttribute("data-id");
+
+    const enrollmentRef = collection(db, "enrollment");
+    const q = query(enrollmentRef, where("courseId", "==", courseId), where("userId", "==", currentUser.uid));
+    const enrollmentSnapshot = await getDocs(q);
+
+    if (!enrollmentSnapshot.empty) {
+        const enrollmentData = enrollmentSnapshot.docs[0].data();
+        if (enrollmentData.status === "approved") {
+            window.location.href = `courseContent.html?courseId=${courseId}`;
+        } else {
+            alert("Your enrollment request is pending approval.");
+        }
+    } else {
+        try {
+            await addDoc(enrollmentRef, {
+                courseId: courseId,
+                userId: currentUser.uid,
+                status: "pending"
+            });
+
+            alert("Enrollment request submitted. Waiting for approval.");
+        } catch (error) {
+            console.error("Error enrolling in course:", error);
+        }
+    }
+}
+
+function watchEnrollmentStatus() {
+    if (!currentUser) return;
+
+    const enrollmentRef = collection(db, "enrollment");
+    const q = query(enrollmentRef, where("userId", "==", currentUser.uid));
+
+    onSnapshot(q, (snapshot) => {
+        snapshot.docs.forEach(enrollmentDoc => {
             const enrollmentData = enrollmentDoc.data();
-            if (enrollmentData.userId === userId && enrollmentData.courseId === courseId) {
-                if (enrollmentData.status === "approved") {
-                    alert("Your enrollment is approved!");
-                    window.location.href = `courseContent.html?courseId=${courseId}`;
-                } else {
-                    console.log("Enrollment status:", enrollmentData.status);
-                    alert("Your enrollment is not approved yet.");
+            const courseId = enrollmentData.courseId;
+            const status = enrollmentData.status;
+
+            const button = document.querySelector(`button[data-id="${courseId}"]`);
+            if (button) {
+                if (status === "approved") {
+                    button.innerText = "Open Course";
+                    button.disabled = false;
+                    button.addEventListener("click", () => {
+                        window.location.href = `courseContent.html?courseId=${courseId}`;
+                    });
+                } else if (status === "pending") {
+                    button.innerText = "Pending Approval";
+                    button.disabled = true;
                 }
             }
         });
