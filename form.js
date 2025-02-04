@@ -94,25 +94,25 @@ document.getElementById('form').addEventListener('submit', async function (event
         return;
     }
 
-    //  Validate username
+
     if (!validateUsername(Username_sign_up)) {
         alert("Username must contain only letters and spaces!");
         return;
     }
 
-    // Validate email
+   
     if (!validateEmail(Email_sign_up)) {
         alert("Invalid email format!");
         return;
     }
 
-    //  Validate password
+   
     if (!validatePassword(password_sign_up)) {
         alert("Password must be 8-20 characters long and include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character!");
         return;
     }
 
-//to add the name of the user to the database 
+
       
 
     createUserWithEmailAndPassword(auth, Email_sign_up, password_sign_up)
@@ -142,7 +142,7 @@ document.getElementById('form').addEventListener('submit', async function (event
 
 
 
-// sign in /////
+
 document.getElementById('form_in').addEventListener('submit', async function (event) {
 
     event.preventDefault();
@@ -185,7 +185,7 @@ document.getElementById('form_in').addEventListener('submit', async function (ev
 
 
 
-//for test the token
+
 
 onAuthStateChanged(auth, (user) => {
  
